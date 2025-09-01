@@ -44,7 +44,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Header */
         header {
             background-color: #1d54a3;
             backdrop-filter: blur(10px);
@@ -263,7 +262,6 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Sobre */
         #about {
             padding: 80px 20px;
             background-color: white;
@@ -302,7 +300,6 @@
             box-shadow: var(--shadow);
         }
 
-        /* Parcerias */
         main.container {
             margin: 0;
             padding: 4rem 20px;
@@ -337,7 +334,6 @@
             color: #1d54a3;
         }
 
-        /* Contato */
         #contact {
             padding: 80px 20px;
             background-color: white;
@@ -444,7 +440,6 @@
             background-color: var(--primary-hover);
         }
 
-        /* Footer */
         footer {
             background-color: #1d54a3;
             color: white;
@@ -469,7 +464,6 @@
             font-size: 0.95rem;
         }
 
-        /* Responsividade */
         @media (max-width: 768px) {
             header .container {
                 flex-direction: column;
@@ -553,7 +547,6 @@
             }
         }
 
-        /* Layout do mapa e cidades */
         .map-and-cities-container {
             display: flex;
             gap: 30px;
@@ -617,15 +610,12 @@
             margin: 0;
         }
 
-        /* Em telas menores, 1 coluna */
         @media (max-width: 480px) {
             .cities-grid {
                 grid-template-columns: 1fr;
-                /* 1 coluna em mobile */
             }
         }
 
-        /* Em telas médias, pode aumentar para 3 colunas se quiser */
         @media (min-width: 768px) {
             .cities-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -633,7 +623,6 @@
             }
         }
 
-        /* Estilo dos itens da lista */
         #cities-display-list li {
             background-color: var(--primary-color);
             color: white;
@@ -738,7 +727,6 @@
         </div>
     </section>
 
-    <!-- Seção Parcerias -->
     <main class="container" id="services">
         <h2>PARCERIAS</h2>
         <div class="parcerias">
@@ -791,7 +779,6 @@
         </div>
     </section>
 
-    <!-- Rodapé -->
     <footer>
         <div class="container">
             <h3>Leroma Transportes Ltda</h3>
@@ -802,7 +789,6 @@
     </footer>
 
     <script>
-        // Dados dos estados
         const stateData = {
             SP: {
                 name: "São Paulo",
@@ -850,7 +836,6 @@
             stateImage.src = state.image;
             selectedStateName.textContent = state.name;
 
-            // Limpa e preenche a lista de cidades
             citiesDisplayList.innerHTML = "";
             state.cities.forEach(city => {
                 const li = document.createElement("li");
@@ -858,22 +843,20 @@
                 citiesDisplayList.appendChild(li);
             });
 
-            // Mostra o detalhe com animação
             stateDetails.style.display = "block";
             setTimeout(() => {
                 stateDetails.classList.add("visible");
             }, 10);
         });
 
-        // Atualiza o ano
         document.getElementById("year").textContent = new Date().getFullYear();
 
-        // Menu mobile (opcional)
         document.querySelector('.mobile-menu').addEventListener('click', () => {
             const nav = document.querySelector('nav ul');
             nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
         });
     </script>
 </body>
+
 
 </html>
