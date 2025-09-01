@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Leroma Transportes</title>
+    <meta name="description" content="Leroma Transportes - Soluções em logística e transporte de cargas">
+    <meta name="theme-color" content="#1d54a3">
+
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2665b8;
+            --primary-hover: #1d54a3;
+            --text-light: white;
+            --text-dark: #333;
+            --text-gray: #555;
+            --bg-light: #f9f9f9;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            color: var(--text-dark);
+            background-image: url("assets/img/2.png");
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: "Barlow", sans-serif;
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            background-color: #1d54a3;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 100px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            font-family: "Barlow", sans-serif;
+        }
+
+        nav ul a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1.5rem;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        nav ul a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        nav ul a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Seção Unidades */
+        .unidades {
+            padding: 40px 20px 60px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 50PX;
+        }
+
+
+        .unidades .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .text-content h2 {
+            font-family: "Barlow", sans-serif;
+            font-size: 2.8rem;
+            color: var(--text-light);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .title-line {
+            font-family: "Barlow", sans-serif;
+            s width: 80px;
+            background-color: var(--text-light);
+            border: none;
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+
+        .initial-selection-and-map {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .location-selection label {
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        #state-select {
+            padding: 14px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            background-color: white;
+            color: var(--text-dark);
+            transition: var(--transition);
+            width: 100%;
+            max-width: 100%;
+        }
+
+        #state-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(38, 101, 184, 0.1);
+        }
+
+        .state-details {
+            display: none;
+            opacity: 0;
+            animation: fadeIn 0.4s forwards;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 15px;
+        }
+
+        .state-details.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #state-image {
+            width: 200px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        #selected-state-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        #cities-display-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            padding-left: 0;
+        }
+
+        #cities-display-list li {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sobre */
+        #about {
+            padding: 80px 20px;
+            background-color: white;
+            scroll-margin-top: 80px;
+        }
+
+        #about .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+        }
+
+        #about h2 {
+            font-family: "Barlow", sans-serif;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        #about p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        #about .about-img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* Parcerias */
+        main.container {
+            margin: 0;
+            padding: 4rem 20px;
+            background-color: #f0f4fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            scroll-margin-top: 80px;
+        }
+
+        .parcerias {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .parcerias img {
+            max-width: 150px;
+            width: 100%;
+            height: auto;
+        }
+
+        main h2 {
+            font-family: "Barlow", sans-serif;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 0;
+            color: #1d54a3;
+        }
+
+        /* Contato */
+        #contact {
+            padding: 80px 20px;
+            background-color: white;
+            scroll-margin-top: 80px;
+        }
+
+        #contact .container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+        }
+
+        #contact h2 {
+            font-family: "Barlow", sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        #contact p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            max-width: 700px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: var(--text-dark);
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        .info-box i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        form input,
+        form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: "Barlow", sans-serif;
+            font-size: 1rem;
+        }
+
+        form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-family: "Barlow", sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1d54a3;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        footer .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        footer h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #ddd;
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.95rem;
+            }
+
+            .logo img {
+                height: 70px;
+            }
+
+            .text-content h2 {
+                font-size: 2.2rem;
+            }
+
+            .initial-selection-and-map {
+                padding: 20px;
+            }
+
+            .content-wrapper {
+                gap: 20px;
+            }
+
+            main.container,
+            #about .container,
+            #contact .container {
+                padding: 2rem 15px;
+            }
+
+            main h2,
+            #about h2,
+            #contact h2 {
+                font-size: 2rem;
+            }
+
+            .button {
+                padding: 0.8rem 1.2rem;
+            }
+
+            .parcerias {
+                gap: 20px;
+            }
+
+            .parcerias img {
+                max-width: 130px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                gap: 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .text-content h2 {
+                font-size: 1.8rem;
+            }
+
+            #about h2,
+            #contact h2 {
+                font-size: 1.8rem;
+            }
+
+            .parcerias {
+                gap: 15px;
+            }
+
+            .parcerias img {
+                max-width: 110px;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Layout do mapa e cidades */
+        .map-and-cities-container {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .map-section {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .map-section img {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .map-section p {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .cities-section {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        #cities-display-list li {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        #cities-display-list li:hover {
+            transform: scale(1.05);
+        }
+
+        /* Grid de cidades */
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 colunas por padrão */
+            gap: 10px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Em telas menores, 1 coluna */
+        @media (max-width: 480px) {
+            .cities-grid {
+                grid-template-columns: 1fr;
+                /* 1 coluna em mobile */
+            }
+        }
+
+        /* Em telas médias, pode aumentar para 3 colunas se quiser */
+        @media (min-width: 768px) {
+            .cities-grid {
+                grid-template-columns: repeat(3, 1fr);
+                /* 3 colunas em telas maiores */
+            }
+        }
+
+        /* Estilo dos itens da lista */
+        #cities-display-list li {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        #cities-display-list li:hover {
+            transform: scale(1.05);
+            background-color: #1a4b90;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/img/3.png" alt="Logo Leroma Transportes">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">INÍCIO</a></li>
+                    <li><a href="#about">SOBRE</a></li>
+                    <li><a href="#services">PARCEIROS</a></li>
+                    <li><a href="#contact">CONTATO</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Seção Unidades -->
+    <section class="unidades" id="home">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <h2>UNIDADES ATENDIDAS</h2>
+                    <hr class="title-line">
+
+                    <div class="initial-selection-and-map">
+                        <!-- Seleção do Estado -->
+                        <div class="location-selection">
+                            <label for="state-select" class="sr-only">Selecione um Estado</label>
+                            <select id="state-select">
+                                <option value="">Selecione um Estado</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="DF">Distrito Federal</option>
+                            </select>
+                        </div>
+
+                        <!-- Detalhes do Estado (mapa + cidades) -->
+                        <div class="state-details">
+                            <div class="map-and-cities-container">
+                                <!-- Mapa -->
+                                <div class="map-section">
+                                    <img id="state-image" alt="Mapa do Estado"
+                                        style="width: 100%; max-width: 300px; border-radius: 8px; box-shadow: var(--shadow);">
+                                    <p style="margin-top: 10px; font-size: 1rem; color: var(--primary-color); font-weight: 600;"
+                                        id="selected-state-name"></p>
+                                </div>
+
+                                <!-- Cidades Atendidas -->
+                                <div class="cities-section">
+                                    <h4 style="margin: 15px 0 10px; color: var(--text-dark);">Cidades Atendidas:</h4>
+                                    <ul id="cities-display-list" class="cities-grid">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="about">
+        <div class="container">
+            <h2>SOBRE A LEROMA TRANSPORTES</h2>
+            <p>
+                A <strong>Leroma Transportes</strong> atua no setor de logística e transporte de cargas há mais de 5
+                anos,
+                oferecendo soluções seguras, rápidas e eficientes para empresas de diversos segmentos. Com frota moderna
+                e equipe treinada, garantimos a integridade da sua carga do início ao destino final.
+            </p>
+            <p>
+                Nossa missão é proporcionar um serviço de excelência com foco na pontualidade, transparência e
+                atendimento
+                personalizado. Atendemos diversas regiões do Brasil com compromisso e profissionalismo.
+            </p>
+        </div>
+    </section>
+
+    <!-- Seção Parcerias -->
+    <main class="container" id="services">
+        <h2>PARCERIAS</h2>
+        <div class="parcerias">
+            <img src="assets/img/comolatti.png" alt="Comolatti">
+            <img src="assets/img/fedex.png" alt="FedEx">
+            <img src="assets/img/shopee.png" alt="Shopee">
+        </div>
+    </main>
+
+    <!-- Seção Contato -->
+    <section id="contact">
+        <div class="container">
+            <h2>ENTRE EM CONTATO</h2>
+            <p>Estamos prontos para atender você com agilidade e profissionalismo. Preencha o formulário ou utilize os
+                dados abaixo.</p>
+
+            <div class="contact-info">
+                <div class="info-box">
+                    <h3><i class="fas fa-map-marker-alt"></i> Endereço</h3>
+                    <p> Rua Deputado Manoel Joaquim Fernandes, 654</p>
+                    <p> Garça - SP, 17400-000</p>
+                </div>
+                <div class="info-box">
+                    <h3><i class="fas fa-envelope"></i> E-mail</h3>
+                    <p> leromatransportes@gmail.com.br</p>
+                </div>
+                <div class="info-box">
+                    <h3><i class="fas fa-phone"></i> Telefone</h3>
+                    <p> (14) 3471-2543</p>
+                    <p> (14) 99713-7292 (WhatsApp)</p>
+                </div>
+            </div>
+
+            <form action="https://formsubmit.co/leromatransportes@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="simple">
+                <input type="hidden" name="_subject" value="Novo contato no site Leroma Transportes">
+                <input type="hidden" name="_autoresponse" value="Agradecemos o seu contato! Em breve retornaremos.">
+
+                <input type="text" name="nome" placeholder="Seu nome" required>
+                <input type="email" name="email" placeholder="Seu e-mail" required>
+                <input type="tel" name="telefone" placeholder="Seu telefone">
+                <textarea name="mensagem" placeholder="Sua mensagem" required></textarea>
+                <input type="file" name="anexo" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                    placeholder="Anexar arquivo (opcional)"
+                    style="padding: 8px; border: 1px solid #ddd; border-radius: 8px; background: #fff;">
+
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <h3>Leroma Transportes Ltda</h3>
+            <p>Rua Deputado Manoel Joaquim Fernandes, 654</p>
+            <p>Bairro Ferrarópolis, Garça, SP</p>
+            <p>&copy; <span id="year"></span> Leroma Transportes Ltda. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dados dos estados
+        const stateData = {
+            SP: {
+                name: "São Paulo",
+                image: "assets/img/sp.png",
+                cities: ["Presidente Prudente", "Bauru", "São José dos Campos", "Marília"]
+            },
+            MG: {
+                name: "Minas Gerais",
+                image: "assets/img/mg.png",
+                cities: ["Belo Horizonte", "Uberlândia", "Juiz de Fora", "Varginha", "Contagem"]
+            },
+            SC: {
+                name: "Santa Catarina",
+                image: "assets/img/sc.png",
+                cities: ["Florianópolis", "Blumenau", "Chapecó"]
+            },
+            MT: {
+                name: "Mato Grosso",
+                image: "assets/img/mt.png",
+                cities: ["Cuiabá", "Várzea Grande"]
+            },
+            DF: {
+                name: "Distrito Federal",
+                image: "assets/img/df.png",
+                cities: ["Brasília"]
+            }
+        };
+
+        const stateSelect = document.getElementById("state-select");
+        const stateImage = document.getElementById("state-image");
+        const selectedStateName = document.getElementById("selected-state-name");
+        const citiesDisplayList = document.getElementById("cities-display-list");
+        const stateDetails = document.querySelector(".state-details");
+
+        stateSelect.addEventListener("change", function () {
+            const selectedValue = this.value;
+
+            if (!selectedValue) {
+                stateDetails.style.display = "none";
+                stateImage.src = "";
+                return;
+            }
+
+            const state = stateData[selectedValue];
+            stateImage.src = state.image;
+            selectedStateName.textContent = state.name;
+
+            // Limpa e preenche a lista de cidades
+            citiesDisplayList.innerHTML = "";
+            state.cities.forEach(city => {
+                const li = document.createElement("li");
+                li.textContent = city;
+                citiesDisplayList.appendChild(li);
+            });
+
+            // Mostra o detalhe com animação
+            stateDetails.style.display = "block";
+            setTimeout(() => {
+                stateDetails.classList.add("visible");
+            }, 10);
+        });
+
+        // Atualiza o ano
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Menu mobile (opcional)
+        document.querySelector('.mobile-menu').addEventListener('click', () => {
+            const nav = document.querySelector('nav ul');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+
+</html>
